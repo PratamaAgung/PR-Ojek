@@ -11,7 +11,7 @@ public interface User {
     @WebMethod String getPhone(String username);
     @WebMethod String getEmail(String username);
     @WebMethod String getImage(String username);
-    @WebMethod Boolean setDriver(String username);
+    @WebMethod Boolean setDriver(String username, Integer val);
     @WebMethod Boolean isDriver(String username);
     @WebMethod Boolean addUser(String json);
     @WebMethod Boolean setName(String username, String name);
@@ -21,4 +21,5 @@ public interface User {
     @WebMethod Boolean setImage(String username, String image);
     @WebMethod String getAll(String username);
     @WebMethod String getPreferred(String location);
+    @WebMethod String getOtherDriver(String except_name, String location);
 }

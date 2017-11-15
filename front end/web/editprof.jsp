@@ -23,7 +23,7 @@
         <p class="judul">Edit Profile Information</p>
     </div>
 
-    <form method="post" action="jsp/edituser.jsp" enctype="multipart/form-data">
+    <form method="POST" action="jsp/edituser.jsp">
         <input type="hidden" name="token" value="<%= request.getParameter("token") %>">
         <input type="hidden" name="username" value="<%= request.getParameter("username") %>">
         <div class="head-title ">
@@ -49,18 +49,20 @@
 
         <div class="head-title content-font-roboto">
             <div class="field-label"> Your Name </div>
-            <input id="name" type="text" class="field-value" name="name"  value="<% userManager.getName(username); %>">
+            <input id="name" type="text" class="field-value" name="name"  value="<%=userManager.getName(username)%>">
         </div>
 
         <div class="head-title content-font-roboto">
             <div class="field-label"> Phone</div>
-            <input id="phone" type="text" class="field-value" name="phone" value="<% userManager.getPhone(username); %>">
+            <input id="phone" type="text" class="field-value" name="phone" value="<%= userManager.getPhone(username) %>">
         </div>
 
         <div class="head-title content-font-roboto">
             <div class="field-label">Status Driver</div>
             <label class="switch posisi-kanan">
-                <input id="statusDriver" type="checkbox" name="driver_status" onchange="stats()">
+                <input id="statusDriver" type="checkbox" name="driver_status" <% if(userManager.isDriver(username)){
+                    out.print("checked");
+                }%>>
                 <span class="slider round"></span>
             </label>
         </div>

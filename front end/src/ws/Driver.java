@@ -19,4 +19,5 @@ public interface Driver {
     @WebMethod Boolean hideTransactionDriver(String username, Integer id_trx);
     @WebMethod Boolean updateLocationName(String username, String first, String last);
     @WebMethod String getMatch(String location);
+    @WebMethod String getVotes(String username);
 }

@@ -39,8 +39,6 @@ public class UserManager {
         return user.getEmail(username);
     }
 
-    public Boolean setDriver(String username) { return user.setDriver(username); }
-
     public Boolean isDriver(String username) {
         return user.isDriver(username);
     }
@@ -69,7 +67,8 @@ public class UserManager {
         return user.setImage(username, image);
     }
 
-    public String getAll(String username) { return user.getAll(username, image); }
-
-    public String getPreferred(String location) { return user.getPreferred(location); }
+    public String getAll(String username) {return user.getAll(username);}
+    public String getPreferred(String name) {return user.getPreferred(name);}
+    public String getOtherDriver(String except_name, String location){ return user.getOtherDriver(except_name, location);}
+    public Boolean setDriver(String username, Integer val){ return user.setDriver(username, val);}
 }

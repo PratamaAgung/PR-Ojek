@@ -5,6 +5,7 @@ import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Service;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Logger;
 
 public class DriverManager {
     private Driver.Driver driver;
@@ -45,7 +46,10 @@ public class DriverManager {
     }
 
     public String historyDriver(String username_driver){
-        return driver.historyDriver(username_driver);
+        Logger logger = Logger.getLogger(getClass().getName());
+        String ret = driver.historyDriver(username_driver);
+        logger.info(ret);
+        return ret;
     }
 
     public Boolean addLocation(String username, String place) {
@@ -57,6 +61,7 @@ public class DriverManager {
 
     public Boolean hideTransactionOrder(String username, Integer id_trx) { return driver.hideTransactionOrder(username,id_trx); }
     public Boolean hideTransactionDriver(String username, Integer id_trx) { return driver.hideTransactionDriver(username,id_trx); }
-    public Boolean updateLocationName(String username, String first, String last) { return driver.updateLocationName(username,first,last); }
-    public String getMatch(String location) { return driver.getMatch(location); }
+    public Boolean updateLocationName(String username, String first, String last) { return driver.updateLocationName(username,first,last);}
+    public String getMatch(String location) {return driver.getMatch(location);}
+    public String getVotes(String username) {return driver.getVotes(username);}
 }
