@@ -82,7 +82,7 @@ public class UserImpl implements User{
             db.executeUpdate(
                 "UPDATE user "  +
                         "SET name='" + name + "' " +
-                        "WHERE usename='" + username + "'"
+                        "WHERE username='" + username + "'"
             );
             return true;
         } catch (Exception e){
@@ -182,8 +182,8 @@ public class UserImpl implements User{
         try {
             db.executeUpdate(
                     "UPDATE user " +
-                            "SET isdriver = " + val +
-                            "WHERE username = '" + username + "'"
+                            "SET isdriver =" + val +
+                            " WHERE username = '" + username + "'"
             );
             return true;
         } catch (Exception e) {
@@ -192,10 +192,10 @@ public class UserImpl implements User{
     }
 
     @Override
-    public String getPreferred(String name){
+    public String getPreferred(String name, String location){
         try {
-            String res = db.executeQuery("SELECT * FROM user WHERE name LIKE '*" + name + "*' "
-                    + "AND isdriver = 1"
+            String res = db.executeQuery("SELECT DISTINCT username, name, image FROM user NATURAL JOIN driver_locations WHERE name LIKE '%" + name + "%' "
+                    + "AND isdriver = 1 AND location= '" + location + "'"
             );
             JSONObject json = new JSONObject(res);
             return json.toString();
@@ -207,7 +207,7 @@ public class UserImpl implements User{
     @Override
     public String getOtherDriver(String except_name, String location){
         try {
-            String res = db.executeQuery("SELECT * FROM user WHERE name NOT LIKE '*" + except_name + "*' "
+            String res = db.executeQuery("SELECT DISTINCT username, name, image FROM user NATURAL JOIN driver_locations WHERE name NOT LIKE '%" + except_name + "%' "
                     + "AND isdriver = 1 AND location = '" + location + "'"
             );
             JSONObject json = new JSONObject(res);

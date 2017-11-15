@@ -101,58 +101,6 @@ To change this template use File | Settings | File Templates.
         <div class="column-flex with-border">
             <p class="submain-title">OTHER DRIVERS:</p>
             <div id="other-driver"></div>
-            <%
-                UserManager userManager = new UserManager();
-                DriverManager driverManager = new DriverManager();
-                String search = "agung";
-                String destination = "asu";
-                String tmp = userManager.getPreferred(search);
-                String lain = userManager.getOtherDriver(search, destination);
-                Integer num_row = 0;
-                JSONObject hehe = new JSONObject();
-                JSONObject json = new JSONObject();
-                try {
-                    hehe = new JSONObject(tmp);
-                    json = new JSONObject(lain);
-                    num_row = json.length();
-                } catch (Exception e) {
-                    num_row = 0;
-                }
-
-                String other_driver = "";
-                if (num_row >= 1) {
-                    Integer i = 0;
-                    String driver;
-                    while (i < num_row){
-                        try {
-                            other_driver = other_driver +
-                                    "<div class='head-title driver-list' id='" + json.getJSONObject(i.toString()).getString("username") + "'> " +
-                                    " < div class='gambar-kotak' > " +
-                                    " <img class='square-picture' src = '" + json.getJSONObject(i.toString()).getString("image_address") + "' " +
-                                    " alt = '" + json.getJSONObject(i.toString()).getString("username") + "' > " +
-                                    " </div > " +
-                                    " <div class='detail-select-driver content-font-sanchez' > " +
-                                    " <p > " + json.getJSONObject(i.toString()).getString("name") + " </p > " +
-                                    " <p ><span class='font-rating' > &#9734 " + driverManager.getCurrentRate(json.getString("username")) + " </ " +
-                                    "span > (" + driverManager.getVotes(json.getString("username")) + " votes)</p > " +
-                                    " <div class='green-button posisi-bawah posisi-kanan' " +
-                                    " onclick = 'increase(); iChoose(" + json.getJSONObject(i.toString()).getString("username") + ");' > I Choose You ! </div > " +
-                                    " </div > " +
-                                    " </div > ";
-                        } catch (Exception e){
-                            out.print("Nothing to display");
-                        }
-                        ++i;
-                    }
-                    if (other_driver == ""){
-                        out.print("Nothing to display");
-                    } else {
-                        out.print(other_driver);
-                    }
-                } else {
-                    out.print("Nothing to display");
-                }
-            %>
         </div>
     </div>
     <input name="driver-id" id="driver-id" type="text" style="display:none" >

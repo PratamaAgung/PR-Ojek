@@ -68,7 +68,7 @@ public class UserManager {
     }
 
     public String getAll(String username) {return user.getAll(username);}
-    public String getPreferred(String name) {return user.getPreferred(name);}
+    public String getPreferred(String name, String location) {return user.getPreferred(name, location);}
     public String getOtherDriver(String except_name, String location){ return user.getOtherDriver(except_name, location);}
     public Boolean setDriver(String username, Integer val){ return user.setDriver(username, val);}
 }

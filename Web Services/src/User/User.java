@@ -20,6 +20,6 @@ public interface User {
     @WebMethod Boolean setPassword(String username, String password);
     @WebMethod Boolean setImage(String username, String image);
     @WebMethod String getAll(String username);
-    @WebMethod String getPreferred(String location);
+    @WebMethod String getPreferred(String name, String location);
     @WebMethod String getOtherDriver(String except_name, String location);
 }
