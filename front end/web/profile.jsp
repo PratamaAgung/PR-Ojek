@@ -19,19 +19,20 @@
     String image = "asd";
 
     DriverManager driverManager = new DriverManager();
-    Float rating = Float.parseFloat(driverManager.getCurrentRate(username));
-    Integer votes = 500;
+    String rating = driverManager.getCurrentRate(username);
+    String votes = driverManager.getVotes(username);
 
     String location = driverManager.getLocation(username);
     JSONObject json_loc;
-    if(location == null){
+    if(location != null){
         json_loc = new JSONObject(location);
     } else {
         json_loc = new JSONObject();
     }
+
     String location_str = "";
     for (Integer i = 0; i<json_loc.length(); i++) {
-        location_str = "<ul> <li>" + json_loc.getString(i.toString()) + "</li>" + location_str + "</ul>";
+        location_str += "<li>" + json_loc.getJSONObject(i.toString()).getString("location") + "</li>";
     }
 
     String info_location = "";
@@ -39,7 +40,7 @@
     String rating_str;
     if (statusdriver) {
         driver_str = "Driver";
-        rating_str = " | <span class='font-rating'>&#9734 "+ rating.toString() + "</span> ("+ votes.toString() +"  votes)";
+        rating_str = " | <span class='font-rating'>&#9734 "+ rating + "</span> ("+ votes+"  votes)";
         info_location = info_location +
                 "<div class=\"head-title\">" +
                 "<div class=\"kiri\"> " +

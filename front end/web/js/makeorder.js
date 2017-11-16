@@ -1,4 +1,8 @@
 var step = 1;
+var chosen_driver = null;
+var rating = 0;
+var pick = null;
+var destination = null;
 
 function check(step) {
     if(step == 1){
@@ -28,6 +32,8 @@ function check(step) {
 
 function checkLocation() {
     if(document.getElementById('destination').value != "" && document.getElementById('pick-location').value != "") {
+        pick = document.getElementById("pick-location").value;
+        destination = document.getElementById('destination').value;
         return true;
     }else {
         alert("Isi destination dan pick location");
@@ -93,8 +99,7 @@ function setOtherDriver(search,id,destination,pick){
 }
 
 function iChoose(id_driver) {
-    document.getElementById("driver-id").value = id_driver;
-    // console.log(id_driver);
+    chosen_driver = id_driver;
     var xmlhttp;
     if (window.XMLHttpRequest) {
         // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -103,17 +108,48 @@ function iChoose(id_driver) {
         // code for IE6, IE5
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    // console.log("masuk");
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            // console.log("response" + this.responseText);
-            if(this.response == -1){
-                console.log("aneh");
-            }else {
-                document.getElementById("info-selected-driver").innerHTML = this.response
-            }
+            var response = JSON.parse(this.response);
+            document.getElementById("show-name").innerHTML = response["0"]["name"];
+            document.getElementById("show-username").innerHTML = "@" + response["0"]["username"];
         }
     };
-    xmlhttp.open("GET", "jsp/getpreferreddriver.jsp?get_info=" + id_driver, true);
+    xmlhttp.open("GET", "jsp/getUserDetail.jsp?" + "username=" + id_driver, true);
     xmlhttp.send();
 }
+
+function rate(nb){
+    rating = nb;
+}
+
+function order(){
+    if(chosen_driver != null && rating > 0){
+        var xmlhttp;
+        var comment = document.getElementById("comment").value;
+
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var response = JSON.parse(this.response);
+                if(response == true){
+                    window.location.href = "makeorder.jsp?token=" + token + "&username=" + username;
+                }else {
+                    alert("Sorry we encountered an error :(");
+                }
+            }
+        };
+        xmlhttp.open("GET", "jsp/completeorder.jsp?" + "username=" + username + "&driver=" + chosen_driver +
+        "&comment=" + comment + "&rating=" + rating + "&pick=" + pick + "&dest=" + destination, true);
+        xmlhttp.send();
+    } else {
+        alert("Please give rating to our driver");
+    }
+}
+

@@ -44,21 +44,21 @@
                         " <p ><span class='font-rating'> &#9734 " + driverManager.getCurrentRate(temp_username) + " </" +
                     "span> (" + driverManager.getVotes(temp_username) + " votes)</p> " +
                         " <div class='green-button posisi-bawah posisi-kanan' " +
-                " onclick = 'increase(); iChoose(\'" + temp_username + "\');'> I Choose You ! </div> " +
+                " onclick = 'increase(); iChoose(\"" + temp_username + "\");'> I Choose You ! </div> " +
                     " </div > " +
                     " </div > ";
                 } catch (Exception e){
-                    return "Nothing to display";
+                    return "<div class='head-title driver-list content-font-segoe'> <p class='posisi-tengah'>Nothing to Display :(</p></div>";
                 }
                 ++i;
             }
             if (other_driver == ""){
-                return "Nothing to display";
+                return "<div class='head-title driver-list content-font-segoe'> <p class='posisi-tengah'>Nothing to Display :(</p></div>";
             } else {
                 return other_driver;
             }
         } else {
-            return "Nothing to display";
+            return "<div class='head-title driver-list content-font-segoe'> <p class='posisi-tengah'>Nothing to Display :(</p></div>";
         }
     }
 %>

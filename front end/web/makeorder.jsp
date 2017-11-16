@@ -121,14 +121,14 @@ To change this template use File | Settings | File Templates.
                     <img class="user-profpic" src="img/profpic.JG" alt="asd" ></img>
                 </div>
             </div>
-            <p><span class="username-profile">@username</span></p>
-            <p>user full name</p>
+            <p><span class="username-profile" id="show-username">@username</span></p>
+            <p id="show-name">user full name</p>
             <fieldset class="rating" id="rate">
-                <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
-                <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
-                <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
-                <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
-                <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+                <input type="radio" id="star5" name="rating" value="5" onclick="rate(5)"/><label for="star5" title="Rocks!">5 stars</label>
+                <input type="radio" id="star4" name="rating" value="4" onclick="rate(4)"/><label for="star4" title="Pretty good">4 stars</label>
+                <input type="radio" id="star3" name="rating" value="3" onclick="rate(3)"/><label for="star3" title="Meh">3 stars</label>
+                <input type="radio" id="star2" name="rating" value="2" onclick="rate(2)"/><label for="star2" title="Kinda bad">2 stars</label>
+                <input type="radio" id="star1" name="rating" value="1" onclick="rate(1)"/><label for="star1" title="Sucks big time">1 star</label>
             </fieldset>
         </div>
 
@@ -137,12 +137,16 @@ To change this template use File | Settings | File Templates.
         </div>
         <!-- Kurang your comment di text area -->
         <div class="head-title content-font-sanchez">
-            <button class="green-button posisi-kanan content-font-sanchez" onclick="order('<%= request.getParameter("username")%>')">Complete <br> Order</button>
+            <button class="green-button posisi-kanan content-font-sanchez" onclick="order()">Complete <br> Order</button>
         </div>
     </div>
     <!--            </form>-->
 </div>
 
+<script type="text/javascript">
+    var token = '<%= request.getParameter("token") %>';
+    var username = '<%= request.getParameter("username") %>';
+</script>
 <script src="js/makeorder.js"></script>
 <script type="text/javascript" src="js/logout.js"></script>
 </body>
