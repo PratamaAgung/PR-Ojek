@@ -19,10 +19,8 @@ public class DriverImpl implements Driver{
     @Override
     public String getLocation(String username){
         try {
-            String tmp =  db.executeQuery("SELECT location FROM driver_locations WHERE username=" + username);
-            JSONObject json = new JSONObject(tmp);
-            String res = json.getJSONObject("0").getString("location");
-            return res;
+            String tmp =  db.executeQuery("SELECT location FROM driver_locations WHERE username='" + username + "'");
+            return tmp;
         } catch (Exception e){
             return "null";
         }
@@ -30,9 +28,15 @@ public class DriverImpl implements Driver{
     @Override
     public String getCurrentRate(String username){
         try {
-            String tmp =  db.executeQuery("SELECT SUM(rating)/COUNT(rating) as rate FROM transaction WHERE username='"+username+"'");
+            String tmp =  db.executeQuery("SELECT AVG(rating) as rate FROM transaction WHERE username_driver='"+username+"'");
             JSONObject json = new JSONObject(tmp);
             String res = json.getJSONObject("0").getString("rate");
+            if(res == null){
+                res = "0";
+            } else {
+                Float parse_res = Float.parseFloat(res);
+                res = String.format("%.2f", parse_res);
+            }
             return res;
         } catch (Exception e){
             return "0";
@@ -43,7 +47,7 @@ public class DriverImpl implements Driver{
     public Boolean addHistory(String user, String driver, Integer rating,
                                String comment, String time, String pick, String destination){
         try {
-            db.executeUpdate("INSERT INTO transaction VALUES ('0', "
+            db.executeUpdate("INSERT INTO transaction VALUES (NULL, "
                 + "'" + user + "', '" + driver + "', '" + rating.toString() + "', '"
                     + comment + "', '" + time + "', '" + pick + "', '" + destination + "', 0, 0)");
             return true;
@@ -84,8 +88,15 @@ public class DriverImpl implements Driver{
     @Override
     public Boolean addLocation(String drive, String location){
         try {
-            db.executeUpdate("INSERT INTO driver_locations VALUES ('" + drive + "', '" + location + "')");
-            return true;
+            String location_exist = db.executeQuery("SELECT COUNT(*) as many FROM driver_locations WHERE username='" + drive + "' AND location='" + location + "'");
+            JSONObject json = new JSONObject(location_exist);
+            String nb_exist = json.getJSONObject("0").getString("many");
+            if(Integer.parseInt(nb_exist) > 0){
+                return false;
+            } else {
+                db.executeUpdate("INSERT INTO driver_locations VALUES ('" + drive + "', '" + location + "')");
+                return true;
+            }
         } catch (Exception e){
             return false;
         }
@@ -164,8 +175,8 @@ public class DriverImpl implements Driver{
     @Override
     public String getVotes(String username){
         try {
-            String res = db.executeQuery("SELECT SUM(rating) AS votes FROM transaction " +
-                "WHERE username = '" + username + "'"
+            String res = db.executeQuery("SELECT COUNT(rating) AS votes FROM transaction " +
+                "WHERE username_driver = '" + username + "'"
             );
             JSONObject json = new JSONObject(res);
             return json.getJSONObject("0").getString("votes");
