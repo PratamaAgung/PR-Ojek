@@ -66,6 +66,8 @@ public class TokenManager {
                     Timestamp timestamp = result.getTimestamp("time");
                     Timestamp now = new Timestamp(System.currentTimeMillis());
                     if (now.getTime() - timestamp.getTime() <= 30*60*1000){
+                        String update = "UPDATE user_token SET time='" + now.toString() + "' WHERE token='" + token + "'";
+                        stmt.executeUpdate(update);
                         validation = "success";
                     } else {
                         validation = "failed";

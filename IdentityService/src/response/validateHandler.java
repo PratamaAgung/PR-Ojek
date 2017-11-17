@@ -19,14 +19,12 @@ public class validateHandler extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
 
         String status;
         String token = request.getParameter("token");
         TokenManager tokenManager = new TokenManager();
         String validation = tokenManager.validateToken(token);
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
         if (validation != null && validation == "success"){
             status = "success";
         } else {

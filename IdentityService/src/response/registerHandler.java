@@ -37,7 +37,6 @@ public class registerHandler extends HttpServlet {
                 }
                 obj.put("status", "success");
                 obj.put("token", token);
-                obj.put("username", username);
             } else {
                 obj.put("status", "failed");
             }
