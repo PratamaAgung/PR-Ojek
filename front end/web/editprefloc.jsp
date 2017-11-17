@@ -88,7 +88,11 @@
 
 
 </div>
-<script type="text/javascript" src="js/logout.js"></script>
+<script type="text/javascript">
+    var token = '<%= request.getParameter("token") %>';
+</script>
+<script type="text/javascript" src="js/cors.js"></script>
+<script type="text/javascript" src="js/validator.js"></script>
 <script src="js/editprefloc.js"></script>
 </body>
 </html>

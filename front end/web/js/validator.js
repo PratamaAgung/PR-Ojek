@@ -1,5 +1,7 @@
-function logout(token) {
-    var url = IP_ADDR + "/logout";
+var IP_ADDR = "http://localhost:7272";
+
+function validate(token) {
+    var url = IP_ADDR + "/validate";
 
     var xhr = createCORSRequest('POST', url);
     if (!xhr) {
@@ -10,7 +12,7 @@ function logout(token) {
     // Response handlers.
     xhr.onload = function() {
         var response = JSON.parse(this.responseText);
-        if (response.status == "success") {
+        if (response.status != "success") {
             var token = response.token;
             location.href = "login.jsp";
         }
@@ -23,3 +25,5 @@ function logout(token) {
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send("token="+token);
 }
+
+validate(token);
