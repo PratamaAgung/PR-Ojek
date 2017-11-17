@@ -1,35 +1,37 @@
-//     var getUser = "jsp/getUserDetail.jsp?token=";
-//
-//     if (window.XMLHttpRequest) {
-//         // code for IE7+, Firefox, Chrome, Opera, Safari
-//         xmlhttp = new XMLHttpRequest();
-//     } else {
-//         // code for IE6, IE5
-//         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-//     }
-//     xmlhttp.onreadystatechange = function() {
-//         if (this.readyState == 4 && this.status == 200) {
-//             var obj = JSON.parse(this.response);
-//             console.log(obj);
-//             document.getElementById('name').value = obj.name;
-//             document.getElementById('phone').value = obj.phone_number;
-//
-//             if(obj.driver === "1"){
-//                 document.getElementById('statusDriver').checked = true;
-//             }
-//
-//             document.getElementById('img-profile').setAttribute('src', obj.image_address);
-//         }
-//     };
-//     xmlhttp.open("GET", getUser, true);
-//     xmlhttp.send();
-//
-//
-// function cek(yey) {
-//     var path  = document.getElementById('file-upload').value;
-//     var filename = path.replace(/^.*[\\\/]/, '')
-//     document.getElementById('file-path').value = filename;
-//
-// function stats() {
-//     console.log(document.getElementsByName('driver_status'));
-// }
+var true_name = true;
+var true_phone = true;
+
+function checkName(name) {
+    if (name.length > 20) {
+        document.getElementById("error-name").style.display = "block";
+        true_name = false;
+        return false;
+    } else {
+        document.getElementById("error-name").style.display = "none";
+        true_name = true;
+        return true;
+    }
+}
+
+function checkPhoneNumber(phone_number) {
+    var isnum = /^\d+$/.test(phone_number);
+
+    if ((phone_number.length < 9) || (phone_number.length > 14) || !isnum) {
+        document.getElementById("error-phone-number").style.display = "block";
+        true_phone = false;
+        return false;
+    } else {
+        document.getElementById("error-phone-number").style.display = "none";
+        true_phone = true;
+        return true;
+    }
+}
+
+function validateForm(){
+    if (true_name && true_phone){
+        return true;
+    } else {
+        alert("Please fill right value")
+        return false;
+    }
+}

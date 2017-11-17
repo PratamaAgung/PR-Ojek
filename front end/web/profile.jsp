@@ -16,7 +16,7 @@
     String email = userManager.getEmail(username);
     String phone_number = userManager.getPhone(username);
     Boolean statusdriver = userManager.isDriver(username);
-    String image = "asd";
+    String image = userManager.getImage(username);
 
     DriverManager driverManager = new DriverManager();
     String rating = driverManager.getCurrentRate(username);
@@ -63,7 +63,7 @@
     String profile =
           "<div class='main-content'> " +
             ("<div class='gambar-bulat'> " +
-                 "<img class='user-profpic' src=") + image +" alt=" + username +" ></img> " +
+                 "<img class='user-profpic' src=\"") + image +"\" alt=" + username +" >" +
              "</div> " +
           ("</div> " +
            "<p><span class='username-profile'>@") + username + ("</span></p> " +

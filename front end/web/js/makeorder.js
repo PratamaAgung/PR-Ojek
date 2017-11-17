@@ -113,6 +113,8 @@ function iChoose(id_driver) {
             var response = JSON.parse(this.response);
             document.getElementById("show-name").innerHTML = response["0"]["name"];
             document.getElementById("show-username").innerHTML = "@" + response["0"]["username"];
+            document.getElementById("chosen-driver-pic").setAttribute("src", response["0"]["image"]);
+            document.getElementById("chosen-driver-pic").setAttribute("alt", response["0"]["username"]);
         }
     };
     xmlhttp.open("GET", "jsp/getUserDetail.jsp?" + "username=" + id_driver, true);

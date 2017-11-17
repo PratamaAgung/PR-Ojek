@@ -62,7 +62,7 @@ public class DriverImpl implements Driver{
             String tmp =  db.executeQuery(
                     "SELECT * FROM transaction "
                     + "WHERE username_user='" + username_user + "' "
-                    + "AND hideForOrder=0"
+                    + "AND hideForOrder=0 ORDER BY time DESC"
             );
             JSONObject json = new JSONObject(tmp);
             return json.toString();
@@ -77,7 +77,7 @@ public class DriverImpl implements Driver{
             String tmp =  db.executeQuery(
                     "SELECT * FROM transaction "
                             + "WHERE username_driver='" + username_driver + "' "
-                            + "AND hideForDriver=0"
+                            + "AND hideForDriver=0 ORDER BY time DESC"
             );
             JSONObject json = new JSONObject(tmp);
             return json.toString();
@@ -120,7 +120,7 @@ public class DriverImpl implements Driver{
                     "UPDATE transaction " +
                             "SET hideForOrder=1 " +
                             "WHERE username_user='" + username + "' AND " +
-                            "ID=id_trx"
+                            "ID=" + id_trx.toString()
             );
             return true;
         } catch (Exception e){
@@ -135,7 +135,7 @@ public class DriverImpl implements Driver{
                     "UPDATE transaction " +
                             "SET hideForDriver=1 " +
                             "WHERE username_driver='" + username + "' AND " +
-                            "ID=id_trx"
+                            "ID=" + id_trx.toString()
             );
             return true;
         } catch (Exception e){

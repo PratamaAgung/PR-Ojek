@@ -23,12 +23,12 @@
         <p class="judul">Edit Profile Information</p>
     </div>
 
-    <form method="POST" action="jsp/edituser.jsp">
+    <form method="POST" action="/untitled_war_exploded/edituser" enctype="multipart/form-data" onsubmit="return validateForm()">
         <input type="hidden" name="token" value="<%= request.getParameter("token") %>">
         <input type="hidden" name="username" value="<%= request.getParameter("username") %>">
         <div class="head-title ">
             <div class="gambar-kotak">
-                <img id="img-profile" class="square-picture">
+                <img id="img-profile" class="square-picture" src="<%= userManager.getImage(username)%>">
             </div>
 
             <div class="column-flex fit-width">
@@ -49,13 +49,15 @@
 
         <div class="head-title content-font-roboto">
             <div class="field-label"> Your Name </div>
-            <input id="name" type="text" class="field-value" name="name"  value="<%=userManager.getName(username)%>">
+            <input id="name" type="text" class="field-value" name="name"  value="<%=userManager.getName(username)%>" oninput="checkName(this.value)">
         </div>
+        <div id="error-name" style="display: none;">Name must not exceed 20 character</div>
 
         <div class="head-title content-font-roboto">
             <div class="field-label"> Phone</div>
-            <input id="phone" type="text" class="field-value" name="phone" value="<%= userManager.getPhone(username) %>">
+            <input id="phone" type="text" class="field-value" name="phone" value="<%= userManager.getPhone(username) %>" oninput="checkPhoneNumber(this.value)">
         </div>
+        <div id="error-phone-number" style="display: none;">Wrong format</div>
 
         <div class="head-title content-font-roboto">
             <div class="field-label">Status Driver</div>
@@ -126,3 +128,4 @@
 
     }
 </script>
+<script type="text/javascript" src="js/editprof.js"></script>
