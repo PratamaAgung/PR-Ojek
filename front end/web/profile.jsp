@@ -16,7 +16,7 @@
     String email = userManager.getEmail(username);
     String phone_number = userManager.getPhone(username);
     Boolean statusdriver = userManager.isDriver(username);
-    String image = userManager.getImage(username);
+    String image = "asd";
 
     DriverManager driverManager = new DriverManager();
     String rating = driverManager.getCurrentRate(username);
@@ -63,7 +63,7 @@
     String profile =
           "<div class='main-content'> " +
             ("<div class='gambar-bulat'> " +
-                 "<img class='user-profpic' src=\"") + image +"\" alt=" + username +" >" +
+                 "<img class='user-profpic' src=") + image +" alt=" + username +" ></img> " +
              "</div> " +
           ("</div> " +
            "<p><span class='username-profile'>@") + username + ("</span></p> " +
@@ -131,11 +131,8 @@
         out.print(info_location);
     %>
 </div>
-    <script type="text/javascript">
-        var token = '<%= request.getParameter("token") %>';
-    </script>
+
     <script type="text/javascript" src="js/cors.js"></script>
-    <script type="text/javascript" src="js/validator.js"></script>
     <script type="text/javascript" src="js/logout.js"></script>
 </body>
 </html>

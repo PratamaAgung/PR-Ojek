@@ -16,6 +16,10 @@ public class UserImpl implements User{
     }
 
     @Override
+    public Integer isTokenValid(String validation){
+
+    }
+    @Override
     public String getName(String username){
         try {
             String tmp =  db.executeQuery("SELECT name FROM user WHERE username='" + username + "'");

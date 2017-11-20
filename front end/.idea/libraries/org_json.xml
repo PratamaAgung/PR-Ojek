@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="org.json">
     <CLASSES>
-      <root url="jar://E:/The Installer/Netbeans &amp; Java EE/glassfish5/glassfish/lib/org.json.jar!/" />
+      <root url="jar://$USER_HOME$/Documents/Semester5/Tugas/WBD/Tubes2/org.json.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

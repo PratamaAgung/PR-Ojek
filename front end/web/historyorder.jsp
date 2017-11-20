@@ -1,6 +1,5 @@
 <%@ page import="ws.DriverManager" %>
-<%@ page import="org.json.JSONObject" %>
-<%@ page import="ws.UserManager" %><%--
+<%@ page import="org.json.JSONObject" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 05/11/2017
@@ -67,7 +66,6 @@
 
     <%
         DriverManager driverManager = new DriverManager();
-        UserManager userManager = new UserManager();
         String result = driverManager.historyOrder(request.getParameter("username"));
         JSONObject arrayDriver;
         if(!result.equals("null")){
@@ -80,7 +78,7 @@
     <div class="column-flex">
         <div id='<%= arrayDriver.getJSONObject(i.toString()).getString("ID") %>' class='head-title driver-list'>
             <div class='gambar-kotak'>
-                <img class='square-picture' src='<%= userManager.getImage(arrayDriver.getJSONObject(i.toString()).getString("username_driver")) %>' alt='<%= arrayDriver.getJSONObject(i.toString()).getString("username_driver")%>'>
+                <img class='square-picture' src='img/profpic.JPG' alt='pikachu'>
             </div>
             <div class='detail-select-driver column-flex content-font-sanchez no-margin'>
                 <p class='history-date'><%= arrayDriver.getJSONObject(i.toString()).getString("time")%></p>
@@ -120,11 +118,7 @@
     }
 
 </script>
-    <script type="text/javascript">
-        var token = '<%= request.getParameter("token") %>';
-    </script>
     <script type="text/javascript" src="js/cors.js"></script>
-    <script type="text/javascript" src="js/validator.js"></script>
     <script type="text/javascript" src="js/logout.js"></script>
 </body>
 </html>

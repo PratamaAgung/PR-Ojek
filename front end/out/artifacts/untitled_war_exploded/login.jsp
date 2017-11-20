@@ -40,7 +40,7 @@
     <input class="content-font-sanchez" id="login-go" type="submit" onclick="login()" value="GO!">
   </div>
 </div>
-
-  <script src="js/login_cors.js"></script>
+  <script src="js/cors.js"></script>
+  <script src="js/login.js"></script>
 </body>
 </html>

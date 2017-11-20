@@ -39,8 +39,6 @@ public class UserManager {
         return user.getEmail(username);
     }
 
-    public String getImage(String username) { return user.getImage(username); }
-
     public Boolean isDriver(String username) {
         return user.isDriver(username);
     }

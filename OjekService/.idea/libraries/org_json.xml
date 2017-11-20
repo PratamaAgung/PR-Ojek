@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="org.json">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Documents/Semester5/Tugas/WBD/Tubes2/org.json.jar!/" />
+      <root url="jar://$USER_HOME$/Documents/Semester5/Tugas/WBD/Tubes2/com.mysql.jdbc_5.1.5.jar!/" />
+      <root url="jar://$USER_HOME$/Documents/Semester5/Tugas/WBD/Tubes2/servlet-2.2.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

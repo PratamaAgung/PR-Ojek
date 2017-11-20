@@ -7,6 +7,7 @@ import javax.jws.soap.SOAPBinding.Style;
 @WebService
 @SOAPBinding(style = Style.RPC)
 public interface User {
+    @WebMethod Integer isTokenValid(String validation);
     @WebMethod String getName(String username);
     @WebMethod String getPhone(String username);
     @WebMethod String getEmail(String username);
